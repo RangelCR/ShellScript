@@ -21,7 +21,6 @@ do
 	livre=$(free -m | grep Mem | awk '{print $7}')
         if [ $livre -lt $MINIMO ]
         then
-		echo "Abaixo do minimo"
                 echo -e  "Subject:Memoria $hostname\n\nA memória livre do servidor está abaixo de $MINIMO, por favor verifique!\n\nTimestamp: $timestamp" | ssmtp endereço@dominio.com
                 sleep 60
         fi
