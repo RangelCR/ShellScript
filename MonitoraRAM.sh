@@ -13,17 +13,19 @@ COMMENT
 TOTAL=$(free -m | grep Mem | awk '{print $2}')
 MINIMO=$(awk "BEGIN {print int($TOTAL * 0.1)}")
 hostname=$(hostname)
-timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+
 
 #CRIANDO LOOP QUE FARÁ O MONITORAMENTO
 while true
 do
+        timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 	livre=$(free -m | grep Mem | awk '{print $7}')
         if [ $livre -lt $MINIMO ]
         then
                 echo -e  "Subject:Memoria $hostname\n\nA memória livre do servidor está abaixo de $MINIMO, por favor verifique!\n\nTimestamp: $timestamp" | ssmtp endereço@dominio.com
-                sleep 60
+                
         fi
+        sleep 60
 done
 
 

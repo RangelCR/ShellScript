@@ -10,7 +10,7 @@ COMMENT
 
 #DEFININDO VARIÁVEIS
 hostname=$(hostname)
-timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+
 
 #CRIANDO LOOP QUE FARÁ O MONITORAMENTO
 while true
@@ -23,6 +23,7 @@ then
 	sleep 20
 	STATUS=$(systemctl is-active apache2)
 	if [ $STATUS  == active ]
+	timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 	then
 		 echo -e  "Subject:Apache2 $hostname \n\nO serviço do apache2 estava interrompido e já foi reiniciado automaticamente, por favor verifique a causa da interrupção para evitar novas indisponibilidades\n\nTimestamp: $timestamp"
 	else
@@ -31,6 +32,8 @@ then
 
 	fi
 fi
+
+sleep 60
 
 
 done

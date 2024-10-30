@@ -10,12 +10,13 @@ Autor: Henrique Rangel de Carvalho Rocha
 COMMENT
 
 HOSTNAME=$(hostname)
-timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+
 
 while true
 do
+    timestamp=$(date +"%Y-%m-%d %H:%M:%S")
     CONSUMO=$(df -h | grep '/$' | awk '{print $5}' | cut -d'%' -f1)
-    if [ $CONSUMO -ge 20 ]; then
+    if [ $CONSUMO -ge 90 ]; then
 	echo -e  "Subject:Armazenamento $HOSTNAME\n\nO espaço livre em disco está abaixo de 10%, por favor verifique com urgência!\n\nTimestamp: $timestamp" | ssmtp endereço@dominio.com
     fi
     sleep 5 
